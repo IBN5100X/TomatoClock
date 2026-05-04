@@ -17,7 +17,7 @@ FocusWindow::FocusWindow(QWidget *parent)
     setGeometry(screen->geometry());
 
     // 专注界面背景图设置
-    QPixmap bgPixmap("lingboli.jpg");
+    QPixmap bgPixmap("mountain.jpg");
     if (!bgPixmap.isNull()) {
         // 图片存在
         bgPixmap = bgPixmap.scaled(this->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
@@ -72,6 +72,16 @@ FocusWindow::FocusWindow(QWidget *parent)
     timer = new QTimer(this);
     timer->setInterval(1000);
 
+    //播放音乐
+    if (QFile::exists("chuanyueshikong.mp3")) {
+        bgmPlayer = new QMediaPlayer(this);
+        audioOutput = new QAudioOutput(this);
+        bgmPlayer->setAudioOutput(audioOutput);
+        bgmPlayer->setSource(QUrl::fromLocalFile("chuanyueshikong.mp3"));
+        bgmPlayer->setLoops(-1); // 无限循环
+        audioOutput->setVolume(0.1); //音量设置
+        bgmPlayer->play();
+    }
     connect(timer, &QTimer::timeout, this, &FocusWindow::updateCountdown);
     connect(pauseButton, &QPushButton::clicked, this, &FocusWindow::switchPause);
     connect(endButton, &QPushButton::clicked, this, &FocusWindow::endEarly);
@@ -111,6 +121,7 @@ void FocusWindow::updateCountdown()
         timer->stop();
         QMessageBox::information(this, "专注完成", "恭喜你完成了本次专注！");
         emit countdownFinished(totalSeconds);
+        if (bgmPlayer) bgmPlayer->stop();
         close();
     }
 }
@@ -135,7 +146,7 @@ void FocusWindow::endEarly()
     focusedSeconds = totalSeconds - remainingSeconds;
 
     emit countdownStopped(focusedSeconds);
-
+    if (bgmPlayer) bgmPlayer->stop();
     close();
 }
 
