@@ -14,7 +14,7 @@ class TodoItemWidget : public QWidget
 public:
     explicit TodoItemWidget(int index, const QString& name, const QString& note, int duration, bool isCompleted, QWidget *parent = nullptr);
 
-    // 设置待办为完成状态（加删除线）
+    // 设置待办为完成状态
     void setCompleted(bool completed);
 
 signals:
