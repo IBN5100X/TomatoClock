@@ -1,0 +1,36 @@
+#ifndef TODOITEMWIDGET_H
+#define TODOITEMWIDGET_H
+
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+
+// 自定义待办项控件：每个待办都有名称、备注、开始和删除按钮
+class TodoItemWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit TodoItemWidget(int index, const QString& name, const QString& note, int duration, bool isCompleted, QWidget *parent = nullptr);
+
+    // 设置待办为完成状态（加删除线）
+    void setCompleted(bool completed);
+
+signals:
+    void startClicked(int index);
+    void deleteClicked(int index);
+
+private slots:
+    void onStartClicked();
+    void onDeleteClicked();
+
+private:
+    int index;
+    QLabel *nameLabel;
+    QLabel *noteLabel;
+    QPushButton *startButton;
+    QPushButton *deleteButton;
+};
+
+#endif // TODOITEMWIDGET_H
