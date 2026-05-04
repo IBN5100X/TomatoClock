@@ -108,7 +108,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     rightLayout->addLayout(titleLayout);
 
-    // 图表（圆角白色背景）
+    // 图表
     QFrame *chartFrame = new QFrame();
     chartFrame->setStyleSheet(
         "QFrame {"
@@ -135,7 +135,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainLayout->addLayout(rightLayout, 1); // 右侧占1份宽度
 
-    //连接信号和槽
+    //连接
     connect(addTodoButton, &QPushButton::clicked, this, &MainWindow::addTodo);
     connect(quickStartButton, &QPushButton::clicked, this, &MainWindow::startQuickTimer);
 
@@ -143,7 +143,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(focusWindow, &FocusWindow::countdownFinished, this, &MainWindow::onFocusFinished);
     connect(focusWindow, &FocusWindow::countdownStopped, this, &MainWindow::onFocusStopped);
 
-    // 初始化图表
+    // 更新图表
     updateChart();
 }
 
