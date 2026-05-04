@@ -16,10 +16,20 @@ FocusWindow::FocusWindow(QWidget *parent)
     QScreen* screen = QApplication::primaryScreen();
     setGeometry(screen->geometry());
 
-    // 纯黑背景
-    QPalette color_bg = this->palette();
-    color_bg.setColor(QPalette::Window, Qt::black);
-    setPalette(color_bg);
+    // 专注界面背景图设置
+    QPixmap bgPixmap("lingboli.jpg");
+    if (!bgPixmap.isNull()) {
+        // 图片存在
+        bgPixmap = bgPixmap.scaled(this->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+        QPalette palette;
+        palette.setBrush(QPalette::Window, QBrush(bgPixmap));
+        this->setPalette(palette);
+    } else {
+        // 图片不存在用黑色
+        QPalette palette = this->palette();
+        palette.setColor(QPalette::Window, Qt::black);
+        setPalette(palette);
+    }
     setAutoFillBackground(true);
 
     QVBoxLayout *colLayout = new QVBoxLayout(this);
