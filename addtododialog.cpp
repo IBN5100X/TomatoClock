@@ -25,7 +25,7 @@ AddTodoDialog::AddTodoDialog(QWidget *parent)
 
     colLayout->addWidget(new QLabel("备注:"));
     noteEdit = new QTextEdit();
-    noteEdit->setPlaceholderText("可以添加一些备注信息");
+    noteEdit->setPlaceholderText("在此可以添加一些备注信息");
     colLayout->addWidget(noteEdit);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout();
@@ -36,7 +36,7 @@ AddTodoDialog::AddTodoDialog(QWidget *parent)
     buttonLayout->addWidget(cancelButton);
     colLayout->addLayout(buttonLayout);
 
-    //信号与槽的连接
+    //连接
     connect(okButton, &QPushButton::clicked, this, &QDialog::accept);
     connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 }
