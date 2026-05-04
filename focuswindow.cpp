@@ -72,16 +72,6 @@ FocusWindow::FocusWindow(QWidget *parent)
     timer = new QTimer(this);
     timer->setInterval(1000);
 
-    //播放音乐
-    if (QFile::exists("chuanyueshikong.mp3")) {
-        bgmPlayer = new QMediaPlayer(this);
-        audioOutput = new QAudioOutput(this);
-        bgmPlayer->setAudioOutput(audioOutput);
-        bgmPlayer->setSource(QUrl::fromLocalFile("chuanyueshikong.mp3"));
-        bgmPlayer->setLoops(-1); // 无限循环
-        audioOutput->setVolume(0.1); //音量设置
-        bgmPlayer->play();
-    }
     connect(timer, &QTimer::timeout, this, &FocusWindow::updateCountdown);
     connect(pauseButton, &QPushButton::clicked, this, &FocusWindow::switchPause);
     connect(endButton, &QPushButton::clicked, this, &FocusWindow::endEarly);
@@ -99,6 +89,16 @@ void FocusWindow::startCountdown()
     isPaused = false;
     pauseButton->setText("暂停");
     timer->start();
+    //播放音乐
+    if (QFile::exists("chuanyueshikong.mp3")) {
+        bgmPlayer = new QMediaPlayer(this);
+        audioOutput = new QAudioOutput(this);
+        bgmPlayer->setAudioOutput(audioOutput);
+        bgmPlayer->setSource(QUrl::fromLocalFile("chuanyueshikong.mp3"));
+        bgmPlayer->setLoops(-1); // 无限循环
+        audioOutput->setVolume(0.1); //音量设置
+        bgmPlayer->play();
+    }
 }
 
 void FocusWindow::keyPressEvent(QKeyEvent *event)
@@ -121,7 +121,10 @@ void FocusWindow::updateCountdown()
         timer->stop();
         QMessageBox::information(this, "专注完成", "恭喜你完成了本次专注！");
         emit countdownFinished(totalSeconds);
-        if (bgmPlayer) bgmPlayer->stop();
+        if (bgmPlayer){
+            bgmPlayer->stop();
+            delete bgmPlayer;
+        }
         close();
     }
 }
@@ -132,10 +135,12 @@ void FocusWindow::switchPause()
         timer->start();
         pauseButton->setText("暂停");
         isPaused = false;
+        if (bgmPlayer) bgmPlayer->play();
     } else {
         timer->stop();
         pauseButton->setText("继续");
         isPaused = true;
+        if(bgmPlayer) bgmPlayer->pause();
     }
 }
 
@@ -146,7 +151,10 @@ void FocusWindow::endEarly()
     focusedSeconds = totalSeconds - remainingSeconds;
 
     emit countdownStopped(focusedSeconds);
-    if (bgmPlayer) bgmPlayer->stop();
+    if (bgmPlayer){
+        bgmPlayer->stop();
+        delete bgmPlayer;
+    }
     close();
 }
 
