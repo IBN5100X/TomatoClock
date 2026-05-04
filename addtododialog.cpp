@@ -25,7 +25,7 @@ AddTodoDialog::AddTodoDialog(QWidget *parent)
 
     colLayout->addWidget(new QLabel("备注:"));
     noteEdit = new QTextEdit();
-    noteEdit->setPlaceholderText("在此可以添加一些备注信息");
+    noteEdit->setPlaceholderText("可以添加一些备注信息");
     colLayout->addWidget(noteEdit);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout();
