@@ -22,7 +22,6 @@
 #include "addtododialog.h"
 #include "todoitemwidget.h"
 
-// 待办事项结构体
 struct TodoItem {
     QString name;
     QString note;
@@ -51,22 +50,22 @@ private slots:
     void onFocusStopped(int focusedSeconds);
 
 private:
-    QListWidget *todoList;
-    QPushButton *addTodoButton;
-    QSpinBox *quickTimeSpin;
-    QPushButton *quickStartButton;
-    QLabel *totalFocusLabel;
-    QChartView *chartView;
+    QListWidget* todoList;
+    QPushButton* addTodoButton;
+    QSpinBox* quickTimeSpin;
+    QPushButton* quickStartButton;
+    QLabel* totalFocusLabel;
+    QChartView* chartView;
 
     QList<TodoItem> todos;
     int totalFocusMinutes;
     int currentTodoIndex;
 
-    FocusWindow *focusWindow;
+    FocusWindow* focusWindow;
 
     void updateTotalFocusDisplay();
-    void updateTodoList(); 
-    void updateChart();    
+    void updateTodoList();
+    void updateChart();
 };
 
 #endif // MAINWINDOW_H
