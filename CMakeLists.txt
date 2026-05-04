@@ -21,7 +21,7 @@ set(PROJECT_SOURCES
     focuswindow.h
     addtododialog.cpp
     addtododialog.h
-    todoitemwidget.cpp 
+    todoitemwidget.cpp
     todoitemwidget.h
 )
 
