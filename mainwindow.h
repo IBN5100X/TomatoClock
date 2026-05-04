@@ -44,8 +44,8 @@ public:
 private slots:
     void startQuickTimer();
     void addTodo();
-    void onTodoStartClicked(int index);  // 待办开始按钮点击
-    void onTodoDeleteClicked(int index); // 待办删除按钮点击
+    void onTodoStartClicked(int index);
+    void onTodoDeleteClicked(int index);
     void onFocusFinished(int focusedSeconds);
     void onFocusStopped(int focusedSeconds);
 
