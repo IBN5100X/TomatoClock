@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QKeyEvent>
+#include <QPixmap> //添加了背景图片替换功能
 
 class FocusWindow : public QWidget
 {
