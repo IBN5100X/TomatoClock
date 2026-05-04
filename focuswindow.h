@@ -8,7 +8,11 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QKeyEvent>
-#include <QPixmap> //添加了背景图片替换功能
+#include <QPixmap>
+#include <QFile>
+#include <QUrl>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 class FocusWindow : public QWidget
 {
@@ -37,6 +41,8 @@ public:
     QPushButton* pauseButton;
     QPushButton* endButton;
     QTimer* timer;
+    QMediaPlayer* bgmPlayer;
+    QAudioOutput* audioOutput;
 
     int totalSeconds;
     int remainingSeconds;
