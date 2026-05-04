@@ -6,7 +6,6 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 
-// 自定义待办项控件：每个待办都有名称、备注、开始和删除按钮
 class TodoItemWidget : public QWidget
 {
     Q_OBJECT
